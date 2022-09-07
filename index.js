@@ -1,8 +1,15 @@
+const dotenv = require('dotenv');
+// console.log(process.env) 
 const express = require('express');
-const app = express();
 const port = 3000;
 const path = require('path');
-console.log(__dirname)
+const { connectDB } = require('./src/db')
+// console.log(__dirname)
+
+dotenv.config() // this imports and configures dotenv
+const app = express();
+connectDB();
+
 
 
 app.get('/', (req, res) => {
@@ -22,8 +29,8 @@ const initRoutes = require('./src/routes'); // if you hover over the /src/routes
 initRoutes(app);
 
 
-app.listen(port, () => {
-    console.log(`server is now running on port ${port}`)
+app.listen(process.env.PORT, () => {
+    console.log(`server is now running on port ${process.env.PORT}`)
 });
 
 // console.log(module)
